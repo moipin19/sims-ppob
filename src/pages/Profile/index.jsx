@@ -8,6 +8,7 @@ import { getProfile, updateProfile, uploadProfileImage } from "../../redux/slice
 import useNotify from "../../hooks/useNotify";
 
 function ProfilePage() {
+  const defaultProfilePhoto = "/assets/Profile Photo.PNG";
   const dispatch = useDispatch();
   const notify = useNotify();
   const { user, loading, updating, uploading } = useSelector((state) => state.profile);
@@ -57,7 +58,15 @@ function ProfilePage() {
       <Navbar />
       <main className="container">
         <Card className="profile-page">
-          <img className="avatar-large" src={user?.profile_image || "/assets/Profile Photo.PNG"} alt="avatar" />
+          <img
+            className="avatar-large"
+            src={user?.profile_image || defaultProfilePhoto}
+            alt="avatar"
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = defaultProfilePhoto;
+            }}
+          />
           <label className="upload-label">
             {uploading ? "Uploading..." : "Ganti Foto"}
             <input type="file" accept="image/*" onChange={onImageChange} hidden />

@@ -13,6 +13,7 @@ import {
 import { formatCurrency } from "../../utils/validators";
 
 function HomePage() {
+  const defaultProfilePhoto = "/assets/Profile Photo.PNG";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
@@ -32,13 +33,22 @@ function HomePage() {
     navigate("/transaction");
   };
 
+  console.log(services, 'services')
+
   return (
     <div>
       <Navbar />
       <main className="container">
         <section className="hero">
           <Card className="profile-summary">
-            <img src={user?.profile_image || "/assets/Profile Photo.PNG"} alt="profile" />
+            <img
+              src={user?.profile_image || defaultProfilePhoto}
+              alt="profile"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                event.currentTarget.src = defaultProfilePhoto;
+              }}
+            />
             <p>Selamat datang,</p>
             <h2>
               {user?.first_name} {user?.last_name}
@@ -46,7 +56,7 @@ function HomePage() {
           </Card>
           <Card className="balance-card">
             <p>Saldo anda</p>
-            <h3>{loadingBalance ? "Loading..." : formatCurrency(balance?.balance)}</h3>
+            <h1>{loadingBalance ? "Loading..." : formatCurrency(balance?.balance)}</h1>
           </Card>
         </section>
 

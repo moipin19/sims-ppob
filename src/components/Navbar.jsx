@@ -23,15 +23,17 @@ function Navbar() {
 
   return (
     <header className="navbar">
-      <div className="navbar-brand">
+      <NavLink to="/home" className="navbar-brand">
         <img src="/assets/Logo.PNG" alt="SIMS PPOB" />
-        <span>SIMS PPOB</span>
-      </div>
+        <span>SIMS PPOB ARIFIN</span>
+      </NavLink>
 
       <button
         type="button"
         className="hamburger-button"
-        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-label={
+          isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+        }
         aria-expanded={isMenuOpen}
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
@@ -48,11 +50,15 @@ function Navbar() {
       />
 
       <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-        <NavLink to="/home">Home</NavLink>
+        {/* <NavLink to="/home">Home</NavLink> */}
         <NavLink to="/topup">Top Up</NavLink>
         <NavLink to="/transaction">Transaction</NavLink>
-        <NavLink to="/profile">Profile</NavLink>
-        <button type="button" className="link-button" onClick={() => setShowLogoutModal(true)}>
+        <NavLink to="/profile">Akun</NavLink>
+        <button
+          type="button"
+          className="link-button"
+          onClick={() => setShowLogoutModal(true)}
+        >
           Logout
         </button>
       </nav>

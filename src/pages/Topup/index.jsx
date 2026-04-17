@@ -6,11 +6,13 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import Input from "../../components/Input";
 import StatusModal from "../../components/StatusModal";
+import { getProfile } from "../../redux/slices/profileSlice";
 import { getBalance } from "../../redux/slices/serviceSlice";
 import { topupBalance } from "../../redux/slices/transactionSlice";
 import { formatCurrency } from "../../utils/validators";
 
 function TopupPage() {
+  const defaultProfilePhoto = "/assets/Profile Photo.PNG";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [value, setValue] = useState("");
@@ -25,8 +27,10 @@ function TopupPage() {
   });
   const { balance, loadingBalance } = useSelector((state) => state.service);
   const { loadingTopup } = useSelector((state) => state.transaction);
+  const { user } = useSelector((state) => state.profile);
 
   useEffect(() => {
+    dispatch(getProfile());
     dispatch(getBalance());
   }, [dispatch]);
 
@@ -80,7 +84,14 @@ function TopupPage() {
       <main className="container">
         <section className="hero">
           <Card className="profile-summary">
-            <img src="/assets/Profile Photo.PNG" alt="profile" />
+            <img
+              src={user?.profile_image || defaultProfilePhoto}
+              alt="profile"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                event.currentTarget.src = defaultProfilePhoto;
+              }}
+            />
             <p>Saldo anda</p>
             <h2>{loadingBalance ? "Loading..." : formatCurrency(balance?.balance)}</h2>
           </Card>
