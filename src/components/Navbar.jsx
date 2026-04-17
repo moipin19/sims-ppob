@@ -1,25 +1,13 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import StatusModal from "./StatusModal";
-import { logout } from "../redux/slices/authSlice";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
-
-  const onLogout = () => {
-    setShowLogoutModal(false);
-    dispatch(logout());
-    navigate("/login");
-  };
 
   return (
     <header className="navbar">
@@ -54,26 +42,7 @@ function Navbar() {
         <NavLink to="/topup">Top Up</NavLink>
         <NavLink to="/transaction">Transaction</NavLink>
         <NavLink to="/profile">Akun</NavLink>
-        <button
-          type="button"
-          className="link-button"
-          onClick={() => setShowLogoutModal(true)}
-        >
-          Logout
-        </button>
       </nav>
-
-      <StatusModal
-        isOpen={showLogoutModal}
-        type="confirm"
-        description="Anda yakin ingin logout?"
-        amountText=""
-        statusText=""
-        primaryText="Ya, Logout"
-        onPrimary={onLogout}
-        secondaryText="Batalkan"
-        onSecondary={() => setShowLogoutModal(false)}
-      />
     </header>
   );
 }

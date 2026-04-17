@@ -17,15 +17,22 @@ const EyeOffIcon = () => (
 );
 
 function Input({ label, error, type, ...props }) {
+  const { leftIcon, ...inputProps } = props;
   const isPasswordInput = type === "password";
+  const hasLeftIcon = Boolean(leftIcon);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputType = isPasswordInput && isPasswordVisible ? "text" : type;
 
   return (
     <div className="field">
       {label && <label className="label">{label}</label>}
-      <div className={isPasswordInput ? "input-wrap" : ""}>
-        <input className={`input ${error ? "input-error" : ""}`} type={inputType} {...props} />
+      <div className={isPasswordInput || hasLeftIcon ? "input-wrap" : ""}>
+        {hasLeftIcon && <span className="input-left-icon">{leftIcon}</span>}
+        <input
+          className={`input ${hasLeftIcon ? "input-has-left-icon" : ""} ${error ? "input-error" : ""}`}
+          type={inputType}
+          {...inputProps}
+        />
         {isPasswordInput && (
           <button
             type="button"

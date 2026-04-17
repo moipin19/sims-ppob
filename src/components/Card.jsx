@@ -1,5 +1,9 @@
-function Card({ children, className = "" }) {
-  return <div className={`card ${className}`.trim()}>{children}</div>;
+function Card({ children, className = "", ...props }) {
+  return (
+    <div className={`card ${className}`.trim()} {...props}>
+      {children}
+    </div>
+  );
 }
 
 export default Card;

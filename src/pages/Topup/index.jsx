@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Button from "../../components/Button";
-import Card from "../../components/Card";
 import Input from "../../components/Input";
+import PageHeroHeader from "../../components/PageHeroHeader";
 import StatusModal from "../../components/StatusModal";
 import { getProfile } from "../../redux/slices/profileSlice";
 import { getBalance } from "../../redux/slices/serviceSlice";
 import { topupBalance } from "../../redux/slices/transactionSlice";
 import { formatCurrency } from "../../utils/validators";
 
+const QUICK_TOPUP_AMOUNTS = [10000, 20000, 50000, 100000, 250000, 500000];
+
 function TopupPage() {
-  const defaultProfilePhoto = "/assets/Profile Photo.PNG";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [value, setValue] = useState("");
@@ -82,38 +83,40 @@ function TopupPage() {
     <div>
       <Navbar />
       <main className="container">
-        <section className="hero">
-          <Card className="profile-summary">
-            <img
-              src={user?.profile_image || defaultProfilePhoto}
-              alt="profile"
-              onError={(event) => {
-                event.currentTarget.onerror = null;
-                event.currentTarget.src = defaultProfilePhoto;
-              }}
-            />
-            <p>Saldo anda</p>
-            <h2>{loadingBalance ? "Loading..." : formatCurrency(balance?.balance)}</h2>
-          </Card>
-        </section>
+        <PageHeroHeader user={user} balance={balance} loadingBalance={loadingBalance} />
 
-        <Card>
-          <h3>Silahkan masukkan nominal Top Up</h3>
-          <form onSubmit={onSubmit}>
-            <Input
-              type="number"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder="masukkan nominal top up"
-              min={10000}
-              max={1000000}
-            />
-            <Button type="submit" disabled={!isValid || loadingTopup} className="btn-primary">
-              {loadingTopup ? "Loading..." : "Top Up"}
-            </Button>
+        <section className="topup-section">
+          <p className="section-subtitle">Silahkan masukan</p>
+          <h2 className="section-title">Nominal Top Up</h2>
+          <form onSubmit={onSubmit} className="topup-form-layout">
+            <div>
+              <Input
+                type="number"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="masukan nominal Top Up"
+                min={10000}
+                max={1000000}
+              />
+              <Button type="submit" disabled={!isValid || loadingTopup} className="btn-primary">
+                {loadingTopup ? "Loading..." : "Top Up"}
+              </Button>
+            </div>
+            <div className="quick-topup-grid">
+              {QUICK_TOPUP_AMOUNTS.map((amountValue) => (
+                <button
+                  key={amountValue}
+                  type="button"
+                  className="quick-topup-item"
+                  onClick={() => setValue(String(amountValue))}
+                >
+                  {formatCurrency(amountValue)}
+                </button>
+              ))}
+            </div>
           </form>
           <p className="helper-text">Minimal Rp10.000 dan maksimal Rp1.000.000</p>
-        </Card>
+        </section>
       </main>
       <StatusModal
         isOpen={modalState.open}

@@ -5,6 +5,7 @@ import HomePage from "./pages/Home";
 import ProfilePage from "./pages/Profile";
 import TopupPage from "./pages/Topup";
 import TransactionPage from "./pages/Transaction";
+import PaymentPage from "./pages/Payment";
 import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/topup" element={<TopupPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/transaction" element={<TransactionPage />} />
       </Route>
 

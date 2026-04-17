@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Card from "../../components/Card";
+import PageHeroHeader from "../../components/PageHeroHeader";
 import { getProfile } from "../../redux/slices/profileSlice";
 import {
   getBalance,
@@ -13,7 +14,6 @@ import {
 import { formatCurrency } from "../../utils/validators";
 
 function HomePage() {
-  const defaultProfilePhoto = "/assets/Profile Photo.PNG";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
@@ -30,35 +30,14 @@ function HomePage() {
 
   const onServiceClick = (service) => {
     dispatch(setSelectedService(service));
-    navigate("/transaction");
+    navigate("/payment");
   };
-
-  console.log(services, 'services')
 
   return (
     <div>
       <Navbar />
       <main className="container">
-        <section className="hero">
-          <Card className="profile-summary">
-            <img
-              src={user?.profile_image || defaultProfilePhoto}
-              alt="profile"
-              onError={(event) => {
-                event.currentTarget.onerror = null;
-                event.currentTarget.src = defaultProfilePhoto;
-              }}
-            />
-            <p>Selamat datang,</p>
-            <h2>
-              {user?.first_name} {user?.last_name}
-            </h2>
-          </Card>
-          <Card className="balance-card">
-            <p>Saldo anda</p>
-            <h1>{loadingBalance ? "Loading..." : formatCurrency(balance?.balance)}</h1>
-          </Card>
-        </section>
+        <PageHeroHeader user={user} balance={balance} loadingBalance={loadingBalance} />
 
         <section>
           <h3>Layanan</h3>

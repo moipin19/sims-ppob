@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  color: #f42619;
+  /* color: #f42619; */
   text-decoration: none;
 }
 
@@ -125,6 +125,12 @@ a {
   color: #222;
 }
 
+.btn-outline-danger {
+  background: #fff;
+  color: #f42619;
+  border: 1px solid #f42619;
+}
+
 .field {
   margin-bottom: 14px;
 }
@@ -149,6 +155,31 @@ a {
 
 .input-wrap .input {
   padding-right: 44px;
+}
+
+.input-has-left-icon {
+  padding-left: 38px;
+}
+
+.input-left-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a8a8a;
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-left-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
 }
 
 .input-visibility-toggle {
@@ -198,12 +229,62 @@ a {
   padding: 20px;
 }
 
+.auth-card-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 78vh;
+}
+
+.auth-card-login h1 {
+  text-align: center;
+  font-size: 44px;
+  margin: 32px 0;
+}
+
+.auth-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.auth-card-login form {
+  margin-top: 8px;
+}
+
 .auth-logo {
   width: 42px;
 }
 
 .auth-footer {
   text-align: center;
+  font-size: 13px;
+  color: #666;
+}
+
+.auth-login-alert {
+  margin-top: auto;
+  background: #fff5f5;
+  border: 1px solid #ffd9d9;
+  color: #cc5a5a;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.auth-login-alert button {
+  border: 0;
+  background: transparent;
+  color: #d59191;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .auth-banner {
@@ -232,6 +313,30 @@ a {
 .balance-card {
   color: #fff;
   background: linear-gradient(120deg, #f42619, #ff735e);
+}
+
+.balance-visibility-button {
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+}
+
+.balance-visibility-button svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
 }
 
 .grid-services {
@@ -271,6 +376,16 @@ a {
   margin: 0 auto;
 }
 
+.profile-account-page {
+  max-width: 620px;
+}
+
+.profile-name-heading {
+  text-align: center;
+  margin: 12px 0 18px;
+  font-size: 48px;
+}
+
 .avatar-large {
   width: 92px;
   height: 92px;
@@ -280,11 +395,51 @@ a {
   margin: 0 auto 12px;
 }
 
+.profile-avatar-wrap {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+.profile-avatar-wrap .avatar-large {
+  margin-bottom: 0;
+}
+
+.profile-avatar-edit-icon {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #dcdcdc;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #555;
+}
+
+.profile-avatar-edit-icon svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .upload-label {
   display: inline-block;
   color: #f42619;
   margin-bottom: 12px;
   cursor: pointer;
+}
+
+.profile-action-row {
+  margin-top: 4px;
 }
 
 .row {
@@ -302,7 +457,47 @@ a {
   margin: 12px 0;
 }
 
+.section-subtitle {
+  margin: 4px 0 0;
+  font-size: 26px;
+}
+
+.section-title {
+  margin: 2px 0 16px;
+  font-size: 36px;
+}
+
+.topup-form-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 16px;
+}
+
+.quick-topup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.quick-topup-item {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 11px 10px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .transaction-list {
+  display: grid;
+  gap: 10px;
+}
+
+.transaction-section {
+  margin-top: 8px;
+}
+
+.transaction-history-list {
   display: grid;
   gap: 10px;
 }
@@ -318,6 +513,43 @@ a {
 
 .transaction-item span {
   text-align: right;
+}
+
+.show-more-button {
+  border: 0;
+  background: transparent;
+  color: #f42619;
+  font-weight: 600;
+  display: block;
+  margin: 16px auto 0;
+  cursor: pointer;
+}
+
+.payment-section {
+  margin-top: 8px;
+}
+
+.payment-label {
+  margin: 4px 0;
+  font-size: 30px;
+}
+
+.payment-service-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.payment-service-row img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.payment-service-row h2 {
+  margin: 0;
+  font-size: 34px;
 }
 
 .success {
@@ -430,6 +662,10 @@ a {
     max-width: 520px;
   }
 
+  .auth-card-login h1 {
+    font-size: 36px;
+  }
+
   .auth-banner {
     display: none;
   }
@@ -444,6 +680,10 @@ a {
 
   .grid-services {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .topup-form-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -559,7 +799,40 @@ a {
     height: 80px;
   }
 
+  .profile-name-heading {
+    font-size: 38px;
+  }
+
   .status-modal-amount {
     font-size: 30px;
+  }
+
+  .auth-card-login {
+    min-height: auto;
+  }
+
+  .auth-card-login h1 {
+    font-size: 30px;
+    margin: 20px 0;
+  }
+
+  .section-subtitle {
+    font-size: 22px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .quick-topup-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .payment-label {
+    font-size: 24px;
+  }
+
+  .payment-service-row h2 {
+    font-size: 28px;
   }
 }
